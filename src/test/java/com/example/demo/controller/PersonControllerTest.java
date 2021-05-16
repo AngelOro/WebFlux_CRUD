@@ -1,6 +1,10 @@
-package com.example.demo;
+package com.example.demo.controller;
 
 
+import com.example.demo.controller.PersonController;
+import com.example.demo.model.Person;
+import com.example.demo.repository.PersonRepository;
+import com.example.demo.service.PersonService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
