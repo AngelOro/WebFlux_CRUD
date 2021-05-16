@@ -123,17 +123,19 @@ class CardControllerTest {
         verify(repository).findAll();
     }
 
-    @ParameterizedTest
-    @CsvSource({"Stewar Marin, 02/26, 4124213,VISA,06"})
-    void filterType(String title, String date, String number, String type, String code) {
-        var prueba = Flux.just(new Card("ANGELICA OROZCO", "02/26", "4124213", "VISA", "06"),
-                new Card("PEPITO PEREZ", "01/29", "51234123", "PRIME", "12")
+    @Test
+    void filterType() {
+        var list = Flux.just(
+                new Card("alejo", "25/05/2021", "154641651", "VISA", "06"),
+                new Card("juan", "31/05/2021", "156513", "MASTERCARD", "03")
         );
+        when(repository.findAll()).thenReturn(list);
 
-        prueba = prueba.filter(el -> el.getType().equals("VISA"));
-
-        Assertions.assertEquals(1L,prueba.count().block());
-
+        webTestClient.get()
+                .uri("/card/type/VISA")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody();
     }
 
 }
