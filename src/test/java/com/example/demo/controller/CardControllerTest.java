@@ -86,4 +86,15 @@ class CardControllerTest {
                 });
     }
 
+    @Test
+    void update() {
+        var request = Mono.just(new Card());
+        webTestClient.put()
+                .uri("/card")
+                .body(request, Card.class)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody().isEmpty();
+    }
+
 }
